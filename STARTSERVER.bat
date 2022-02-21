@@ -1,0 +1,1 @@
+"W:\Applications\Unreal Engine\UE_4.26\Engine\Binaries\Win64\UE4Editor.exe" "W:\ThoughtOverflow\Independent\SessionHandlingSteam\SessionHandlingSteam.uproject" -server -log

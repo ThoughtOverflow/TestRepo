@@ -19,6 +19,8 @@ public:
 
 	UCustomGameInstance();
 
+	bool bDedi;
+
 protected:
 
 	virtual void Init() override;

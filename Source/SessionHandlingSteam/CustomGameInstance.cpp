@@ -9,7 +9,7 @@
 
 UCustomGameInstance::UCustomGameInstance()
 {
-	
+	bDedi = false;
 }
 
 void UCustomGameInstance::Init()
@@ -25,6 +25,7 @@ void UCustomGameInstance::Init()
 			SessionInterface->OnJoinSessionCompleteDelegates.AddUObject(this, &UCustomGameInstance::OnJoinSession);
 			SessionInterface->OnFindSessionsCompleteDelegates.AddUObject(this, &UCustomGameInstance::OnFindSessions);
 		}
+		bDedi = IsRunningDedicatedServer();
 	}
 	
 }
@@ -82,9 +83,9 @@ void UCustomGameInstance::CreateServer()
 {
 	FOnlineSessionSettings SessionSettings;
 	SessionSettings.bAllowJoinInProgress = true;
-	SessionSettings.bIsDedicated = false; //Change this later;
+	SessionSettings.bIsDedicated = bDedi; //Change this later;
 	SessionSettings.bIsLANMatch = false;
-	SessionSettings.bUsesPresence = true; //for listen server, this is true, for dedicated it should be false;
+	SessionSettings.bUsesPresence = !bDedi; //for listen server, this is true, for dedicated it should be false;
 	SessionSettings.bShouldAdvertise = true;
 	SessionSettings.NumPublicConnections = 7;
 	
