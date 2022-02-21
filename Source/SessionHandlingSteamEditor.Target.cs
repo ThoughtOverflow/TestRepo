@@ -10,5 +10,6 @@ public class SessionHandlingSteamEditorTarget : TargetRules
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
 		ExtraModuleNames.Add("SessionHandlingSteam");
+
 	}
 }

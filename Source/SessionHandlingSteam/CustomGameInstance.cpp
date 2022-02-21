@@ -25,7 +25,14 @@ void UCustomGameInstance::Init()
 			SessionInterface->OnJoinSessionCompleteDelegates.AddUObject(this, &UCustomGameInstance::OnJoinSession);
 			SessionInterface->OnFindSessionsCompleteDelegates.AddUObject(this, &UCustomGameInstance::OnFindSessions);
 		}
-		bDedi = IsRunningDedicatedServer();
+		if(IsRunningDedicatedServer())
+		{
+			bDedi = true;
+			CreateServer();
+		}else
+		{
+			bDedi = false;
+		}
 	}
 	
 }
