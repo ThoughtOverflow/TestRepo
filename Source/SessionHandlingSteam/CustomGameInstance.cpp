@@ -67,7 +67,9 @@ void UCustomGameInstance::OnFindSessions(bool bSuccess)
 
 		UE_LOG(LogTemp, Warning, TEXT("OnFindSessions: %d"), Results.Num());
 
-		SessionInterface->JoinSession(0, FName("MySession_Test"), Results[0]);
+		bool bsuc = SessionInterface->JoinSession(0, FName("MySession_Test"), Results[0]);
+
+		UE_LOG(LogTemp, Error, TEXT("SUCCCECCSCSDAA: %d"), bsuc);
 		
 	}
 }
