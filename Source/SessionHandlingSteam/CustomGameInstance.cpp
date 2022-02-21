@@ -4,6 +4,7 @@
 #include "CustomGameInstance.h"
 #include "OnlineSubsystem.h"
 #include "OnlineSubsystemUtils.h"
+#include "Kismet/GameplayStatics.h"
 
 
 UCustomGameInstance::UCustomGameInstance()
@@ -48,6 +49,14 @@ void UCustomGameInstance::OnCreateSession(FName SessionName, bool bSuccess)
 void UCustomGameInstance::OnJoinSession(FName SessionName, EOnJoinSessionCompleteResult::Type Result)
 {
 	UE_LOG(LogTemp, Warning, TEXT("OnJoinSession"));
+
+	if(APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0)) {
+
+		FString Address;
+		SessionInterface->GetResolvedConnectString(SessionName, Address);
+		
+		PC->ClientTravel(Address, ETravelType::TRAVEL_Absolute);
+	}
 }
 
 void UCustomGameInstance::OnFindSessions(bool bSuccess)
@@ -57,6 +66,8 @@ void UCustomGameInstance::OnFindSessions(bool bSuccess)
 		TArray<FOnlineSessionSearchResult> Results = SessionSearch->SearchResults;
 
 		UE_LOG(LogTemp, Warning, TEXT("OnFindSessions: %d"), Results.Num());
+
+		SessionInterface->JoinSession(0, FName("MySession_Test"), Results[0]);
 		
 	}
 }
@@ -69,7 +80,7 @@ void UCustomGameInstance::CreateServer()
 	SessionSettings.bIsLANMatch = false;
 	SessionSettings.bUsesPresence = true; //for listen server, this is true, for dedicated it should be false;
 	SessionSettings.bShouldAdvertise = true;
-	SessionSettings.NumPublicConnections = 5;
+	SessionSettings.NumPublicConnections = 7;
 	
 	SessionInterface->CreateSession(0, FName("MySession_Test"), SessionSettings);
 }
