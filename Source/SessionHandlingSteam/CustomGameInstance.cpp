@@ -64,12 +64,16 @@ void UCustomGameInstance::OnFindSessions(bool bSuccess)
 	if(bSuccess)
 	{
 		TArray<FOnlineSessionSearchResult> Results = SessionSearch->SearchResults;
-
+		
 		UE_LOG(LogTemp, Warning, TEXT("OnFindSessions: %d"), Results.Num());
+		
+		UE_LOG(LogTemp, Warning, TEXT("ASDASDSADSADASDSADSADASDSADASDASDASDDS"));
+		if(Results.Num())
+		{
+			bool bsuc = SessionInterface->JoinSession(0, FName("MySession_Test"), Results[0]);
 
-		bool bsuc = SessionInterface->JoinSession(0, FName("MySession_Test"), Results[0]);
-
-		UE_LOG(LogTemp, Error, TEXT("SUCCCECCSCSDAA: %d"), bsuc);
+			UE_LOG(LogTemp, Error, TEXT("SUCCCECCSCSDAA: %d"), bsuc);
+		}
 		
 	}
 }
