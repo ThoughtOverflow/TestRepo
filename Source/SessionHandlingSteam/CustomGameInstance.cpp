@@ -106,7 +106,7 @@ void UCustomGameInstance::JoinServer()
 	SessionSearch = MakeShareable(new FOnlineSessionSearch());
 
 	SessionSearch->bIsLanQuery = false;
-	SessionSearch->MaxSearchResults = 10000;
+	SessionSearch->MaxSearchResults = 100000;
 
 	SessionSearch->QuerySettings.Set(SEARCH_PRESENCE, false, EOnlineComparisonOp::Equals);
 	
