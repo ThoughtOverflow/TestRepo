@@ -110,6 +110,9 @@ void UCustomGameInstance::JoinServer()
 
 	// SessionSearch->QuerySettings.Set(SEARCH_PRESENCE, false, EOnlineComparisonOp::Equals);
 	
+	SessionSearch->QuerySettings.Set(SEARCH_PRESENCE, true, EOnlineComparisonOp::Equals);
+	SessionSearch->QuerySettings.Set(SEARCH_DEDICATED_ONLY, true, EOnlineComparisonOp::Equals);
+	
 	SessionInterface->FindSessions(0, SessionSearch.ToSharedRef());
 }
 
