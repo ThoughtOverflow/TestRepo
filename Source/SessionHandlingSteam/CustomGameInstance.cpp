@@ -79,6 +79,12 @@ void UCustomGameInstance::OnFindSessions(bool bSuccess)
 		UE_LOG(LogTemp, Warning, TEXT("ASDASDSADSADASDSADSADASDSADASDASDASDDS"));
 		if(Results.Num())
 		{
+
+			for(auto& S : Results)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Stuff for session: %s"), *S.Session.OwningUserName);
+			}
+			
 			bool bsuc = SessionInterface->JoinSession(0, FName("MySession_Test"), Results[0]);
 
 			UE_LOG(LogTemp, Error, TEXT("SUCCCECCSCSDAA: %d"), bsuc);
@@ -106,7 +112,8 @@ void UCustomGameInstance::JoinServer()
 
 	SessionSearch->bIsLanQuery = false;
 	SessionSearch->MaxSearchResults = 10000;
-	// SessionSearch->QuerySettings.Set(SEARCH_, true, EOnlineComparisonOp::Equals);
+
+	// SessionSearch->QuerySettings.Set(SEARCH_PRESENCE, true, EOnlineComparisonOp::Equals);
 	
 	SessionInterface->FindSessions(0, SessionSearch.ToSharedRef());
 }
