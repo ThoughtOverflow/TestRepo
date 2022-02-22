@@ -27,6 +27,7 @@ void UCustomGameInstance::Init()
 		}
 		if(IsRunningDedicatedServer())
 		{
+			UE_LOG(LogTemp, Error, TEXT("Running as Dedicated!!!"));
 			bDedi = true;
 			CreateServer();
 		}else
