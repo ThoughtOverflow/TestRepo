@@ -96,6 +96,7 @@ void UCustomGameInstance::CreateServer()
 	SessionSettings.bIsLANMatch = false;
 	SessionSettings.bUsesPresence = !bDedi; //for listen server, this is true, for dedicated it should be false;
 	SessionSettings.bShouldAdvertise = true;
+	SessionSettings.bAllowJoinViaPresence = true;
 	SessionSettings.NumPublicConnections = 7;
 	
 	SessionInterface->CreateSession(0, FName("MySession_Test"), SessionSettings);
@@ -106,12 +107,12 @@ void UCustomGameInstance::JoinServer()
 	SessionSearch = MakeShareable(new FOnlineSessionSearch());
 
 	SessionSearch->bIsLanQuery = false;
-	SessionSearch->MaxSearchResults = 100000;
+	SessionSearch->MaxSearchResults = 10000;
 
-	// SessionSearch->QuerySettings.Set(SEARCH_PRESENCE, false, EOnlineComparisonOp::Equals);
+	SessionSearch->QuerySettings.Set(SEARCH_PRESENCE, false, EOnlineComparisonOp::Equals);
 	
-	SessionSearch->QuerySettings.Set(SEARCH_PRESENCE, true, EOnlineComparisonOp::Equals);
-	SessionSearch->QuerySettings.Set(SEARCH_DEDICATED_ONLY, true, EOnlineComparisonOp::Equals);
+	// SessionSearch->QuerySettings.Set(SEARCH_PRESENCE, true, EOnlineComparisonOp::Equals);
+	// SessionSearch->QuerySettings.Set(SEARCH_DEDICATED_ONLY, true, EOnlineComparisonOp::Equals);
 	
 	SessionInterface->FindSessions(0, SessionSearch.ToSharedRef());
 }
